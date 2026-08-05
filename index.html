@@ -1,87 +1,392 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>L'Oréal | Smart Routine &amp; Product Advisor</title>
+
+    <meta
+      name="description"
+      content="Build a personalized beauty routine with selected L'Oréal products and an AI beauty advisor."
+    />
+
+    <title>L'Oréal | Product-Aware Routine Builder</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
       rel="stylesheet"
     />
+
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
+
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
+    <a class="skip-link" href="#mainContent">Skip to main content</a>
+
     <div class="page-wrapper">
-      <!------- Header / Branding ------->
       <header class="site-header">
-        <img src="img/loreal-logo.png" alt="L'Oréal Logo" class="logo" />
-        <h1 class="site-title">Smart Routine &amp; Product Advisor</h1>
+        <div class="header-content">
+          <img
+            src="img/loreal-logo.png"
+            alt="L'Oréal"
+            class="logo"
+          />
+
+          <div class="hero-copy">
+            <p class="eyebrow">AI-powered beauty planning</p>
+
+            <h1>Build a routine around products you love</h1>
+
+            <p class="hero-description">
+              Explore L'Oréal brand products, save your favorites, and ask the
+              Beauty Advisor to organize them into a personalized routine.
+            </p>
+          </div>
+
+          <div class="header-actions" aria-label="Display options">
+            <label class="web-search-option" for="webSearchToggle">
+              <input
+                id="webSearchToggle"
+                type="checkbox"
+                checked
+              />
+
+              <span>
+                <i
+                  class="fa-solid fa-globe"
+                  aria-hidden="true"
+                ></i>
+
+                Live product search
+              </span>
+            </label>
+
+            <button
+              id="rtlToggle"
+              class="secondary-btn"
+              type="button"
+            >
+              <i
+                class="fa-solid fa-language"
+                aria-hidden="true"
+              ></i>
+
+              <span>RTL mode</span>
+            </button>
+          </div>
+        </div>
       </header>
 
-      <!-- Category Filter -->
-      <div class="search-section">
-        <select id="categoryFilter">
-          <option value="" disabled selected>Choose a Category</option>
-          <option value="cleanser">Cleansers</option>
-          <option value="moisturizer">Moisturizers & Treatments</option>
-          <option value="haircare">Haircare</option>
-          <option value="makeup">Makeup</option>
-          <option value="hair color">Hair Color</option>
-          <option value="hair styling">Hair Styling</option>
-          <option value="men's grooming">Men's Grooming</option>
-          <option value="suncare">Suncare</option>
-          <option value="fragrance">Fragrance</option>
-        </select>
-      </div>
+      <main id="mainContent" class="main-content">
+        <section class="workflow-guide" aria-label="How this app works">
+          <div class="workflow-guide-copy">
+            <p class="section-kicker">Quick start</p>
 
-      <!-- Products Grid -->
-      <div id="productsContainer" class="products-grid"></div>
+            <h2>Pick products, build a routine, and ask for help</h2>
 
-      <!-- Selected Products -->
-      <div class="selected-products">
-        <h2>Selected Products</h2>
-        <div id="selectedProductsList"></div>
-        <button id="generateRoutine" class="generate-btn">
-          <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Routine
-        </button>
-      </div>
+            <p>
+              Start by choosing a few products, then review your selections and
+              let the Beauty Advisor turn them into a personalized routine.
+            </p>
+          </div>
 
-      <!------- Chat Area ------->
-      <section class="chatbox">
-        <h2>Let's Build Your Routine</h2>
-        <div id="chatWindow" class="chat-window"></div>
+          <div class="workflow-steps">
+            <button class="workflow-step" type="button" data-target="catalogSection">
+              <span class="step-number">1</span>
+              <div>
+                <h3>Browse products</h3>
+                <p>Select cards you want to use.</p>
+              </div>
+            </button>
 
-        <form id="chatForm" class="chat-form">
-          <label for="userInput" class="visually-hidden">Message</label>
-          <input
-            id="userInput"
-            name="userInput"
-            type="text"
-            placeholder="Ask me about products or routines…"
-            autocomplete="off"
-            required
-          />
-          <button type="submit" id="sendBtn">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span class="visually-hidden">Send</span>
+            <button class="workflow-step" type="button" data-target="selectedProductsSection">
+              <span class="step-number">2</span>
+              <div>
+                <h3>Review your picks</h3>
+                <p>See your chosen products in the side panel.</p>
+              </div>
+            </button>
+
+            <button class="workflow-step" type="button" data-target="chatSection">
+              <span class="step-number">3</span>
+              <div>
+                <h3>Ask the advisor</h3>
+                <p>Generate a routine and ask follow-up questions.</p>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <section
+          id="catalogSection"
+          class="catalog-section"
+          aria-labelledby="catalogHeading"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Step 1</p>
+
+              <h2 id="catalogHeading">Browse products</h2>
+
+              <p>Select a card to add it to your routine.</p>
+            </div>
+
+            <p
+              id="productCount"
+              class="result-count"
+              aria-live="polite"
+            ></p>
+          </div>
+
+          <div class="filter-panel">
+            <div class="form-field search-field">
+              <label for="productSearch">
+                Search products
+              </label>
+
+              <div class="input-with-icon">
+                <i
+                  class="fa-solid fa-magnifying-glass"
+                  aria-hidden="true"
+                ></i>
+
+                <input
+                  id="productSearch"
+                  type="search"
+                  placeholder="Search by product, brand, or keyword"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="categoryFilter">
+                Category
+              </label>
+
+              <select id="categoryFilter">
+                <option value="">
+                  All categories
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div
+            id="productsContainer"
+            class="products-grid"
+            aria-live="polite"
+            aria-busy="true"
+          ></div>
+
+          <button
+            id="showMoreProducts"
+            class="secondary-btn show-more-btn"
+            type="button"
+            hidden
+          >
+            Show More Products
           </button>
-        </form>
-      </section>
 
-      <!------- Footer Links ------->
+          <div
+            id="emptyProducts"
+            class="empty-state"
+            hidden
+          >
+            <i
+              class="fa-regular fa-face-frown"
+              aria-hidden="true"
+            ></i>
+
+            <h3>No products found</h3>
+
+            <p>Try another keyword or category.</p>
+          </div>
+        </section>
+
+        <section
+          class="routine-layout"
+          aria-label="Routine builder and chat"
+        >
+          <aside
+            id="selectedProductsSection"
+            class="selected-panel"
+            aria-labelledby="selectedHeading"
+          >
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="section-kicker">Step 2</p>
+
+                <h2 id="selectedHeading">
+                  Selected products
+                </h2>
+              </div>
+
+              <span
+                id="selectedCount"
+                class="count-badge"
+              >
+                0
+              </span>
+            </div>
+
+            <div
+              id="selectedProductsList"
+              class="selected-list"
+            ></div>
+
+            <p
+              id="emptySelection"
+              class="empty-selection"
+            >
+              Your chosen products will appear here.
+            </p>
+
+            <button
+              id="clearSelections"
+              class="text-btn"
+              type="button"
+              disabled
+            >
+              <i
+                class="fa-solid fa-trash-can"
+                aria-hidden="true"
+              ></i>
+
+              Clear all selections
+            </button>
+
+            <div class="form-field goals-field">
+              <label for="routineGoals">
+                Your goals or preferences
+              </label>
+
+              <textarea
+                id="routineGoals"
+                rows="4"
+                maxlength="600"
+                placeholder="Example: I have sensitive, combination skin and want a simple morning and evening routine."
+              ></textarea>
+
+              <small>
+                Optional — do not enter private medical information.
+              </small>
+            </div>
+
+            <button
+              id="generateRoutine"
+              class="primary-btn"
+              type="button"
+              disabled
+            >
+              <i
+                class="fa-solid fa-wand-magic-sparkles"
+                aria-hidden="true"
+              ></i>
+
+              <span>Generate my routine</span>
+            </button>
+          </aside>
+
+          <section
+            id="chatSection"
+            class="chatbox"
+            aria-labelledby="chatHeading"
+          >
+            <div class="chat-header">
+              <div>
+                <p class="section-kicker">Step 3</p>
+
+                <h2 id="chatHeading">
+                  Beauty Advisor
+                </h2>
+              </div>
+
+              <span
+                id="chatStatus"
+                class="status-pill"
+              >
+                Waiting for products
+              </span>
+            </div>
+
+            <div
+              id="chatWindow"
+              class="chat-window"
+              role="log"
+              aria-live="polite"
+              aria-relevant="additions"
+            >
+              <div class="message-row assistant">
+                <div
+                  class="message-avatar"
+                  aria-hidden="true"
+                >
+                  L
+                </div>
+
+                <div class="message-bubble">
+                  Choose one or more products, then select
+                  <strong>Generate my routine</strong>. After that, you can ask
+                  follow-up questions about your routine or other beauty
+                  topics.
+                </div>
+              </div>
+            </div>
+
+            <form id="chatForm" class="chat-form">
+              <label
+                for="userInput"
+                class="visually-hidden"
+              >
+                Ask a follow-up question
+              </label>
+
+              <input
+                id="userInput"
+                name="userInput"
+                type="text"
+                maxlength="600"
+                placeholder="Generate a routine to unlock follow-up chat"
+                autocomplete="off"
+                disabled
+                required
+              />
+
+              <button
+                type="submit"
+                id="sendBtn"
+                aria-label="Send message"
+                disabled
+              >
+                <i
+                  class="fa-solid fa-paper-plane"
+                  aria-hidden="true"
+                ></i>
+              </button>
+            </form>
+          </section>
+        </section>
+      </main>
+
       <footer class="site-footer">
-        <p>&copy; 2025 L'Oréal. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
-        </nav>
+        <p>
+          &copy;
+          <span id="currentYear"></span>
+          L'Oréal Routine Builder student project.
+        </p>
+
+        <p class="disclaimer">
+          Product information is educational. Follow product labels and seek
+          professional care for medical concerns.
+        </p>
       </footer>
     </div>
 
